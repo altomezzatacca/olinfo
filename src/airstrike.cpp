@@ -6,8 +6,6 @@ constexpr static int INF = 1e9;
 vector<vector<int>> adj;
 vector<vector<bool>> C;
 
-// madre de dios quante ottimizzazioni, che problema infido
-
 inline bool dfs(int source, int sink, vector<int> &parent) {
 	fill(begin(parent), end(parent), -1);
     stack<int> s;
