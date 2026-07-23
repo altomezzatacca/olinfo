@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-// constraints
-#define MAXN 300000
 
 // input data
 int N;
