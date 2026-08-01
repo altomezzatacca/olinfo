@@ -1,5 +1,5 @@
 # Olinfo
- My submissions from training.olinfo.it (currently missing terry problems)
+ My submissions from training.olinfo.it and territoriali.olinfo.it
 
  Everything is written in **C++**.
 
