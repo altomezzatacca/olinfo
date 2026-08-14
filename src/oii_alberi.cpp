@@ -1,45 +1,35 @@
-#include <bits/stdc++.h>
-#define pb push_back
-#define ff first
-#define ss second
+#include "bits/stdc++.h"
 using namespace std;
-typedef long long ll;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
-constexpr static int inf = 2e9;
-constexpr static ll linf = 1e18;
-constexpr static int mod = 1e9 + 7;
+using ll = long long;
+// se sfrondo i allora sfrondo [i, n - 1]
 
-long long carica(int N, int K, vector<int> A) {
-    if(N == 1) return A[0];
-    vector<ll> B(N), C(N);
-    B[N - 1] = A[N - 1];
-    for(int i = N - 2; i >= 0; i--)
-        B[i] = B[i + 1] + A[i];
-    for(int i = 0; i < N; i++)
-        C[i] = 1LL * (N - i) * K + A[N - 1];
-    ll ix = -1, best = 0;
-    for(int i = 0; i < N; i++)
-        if(B[i] - C[i] > best){
-            best = B[i] - C[i];
+ll carica(int N, int K, vector<int> A){
+    int &n = N, &k = K;
+    vector<int> &a = A;
+    if(n == 1) return a[0];
+    vector<ll> b(n), c(n);
+    b[n - 1] = a[n - 1];
+    for(int i = n - 2; i >= 0; i--)
+        b[i] = b[i + 1] + a[i];
+    for(int i = 0; i < n; i++)
+        c[i] = 1LL * (n - i) * k + a[n - 1];
+    ll ix = -1, best = 0; // best contiene il valore massimo da sottrarre -> costo minimo
+    for(int i = 0; i < n; i++){
+        if(b[i] - c[i] > best){
+            best = b[i] - c[i];
             ix = i;
         }
-    ll ans = (ix == -1 ? B[0] : B[0] - B[ix] + K * (N - ix) + A[N - 1]);
+    }
+    ll ans = (ix == -1 ? b[0] : b[0] - b[ix] + k * (n - ix) + a[n - 1]);
     return ans;
 }
 
 #ifndef EVAL
-
-int main() {
-    int N, K;
-    cin >> N >> K;
-
-    vector<int> A(N);
-    for (int &a: A) cin >> a;
-
-    cout << carica(N, K, A) << endl;
-
+int main(){
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for(auto &u: a) cin >> u;
+    cout << carica(n, k, a) << endl;
     return 0;
 }
-
 #endif
