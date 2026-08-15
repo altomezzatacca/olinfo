@@ -29,5 +29,5 @@ int pota(int N, vector<int> P) {
         cur += V[h];
         ans = max(ans, cur); // massimizzo il numero di nodi che posso tenere
     }
-    return N - ans;
+    return n - ans;
 }
