@@ -1,26 +1,21 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
 bool ordina(int N, vector<int> V, vector<int> &L) {
-    L={};
-    int cons=1;
-    for(int i=1; i<N; i++){
-    	if(V[i]>V[i-1]) {
-    		L.push_back(cons);
-    		cons=0;
-		}
-		cons++;
-	}
-	L.push_back(cons);
-	
-	int ix=0;
-	for(int i=0; i<L.size(); i++){
-		reverse(V.begin() + ix, V.begin() + ix + L[i]);
-		ix+=L[i];
-	}
-    
-    vector<int> Q = V;
-    sort(Q.begin(), Q.end());
-    if (V==Q) return 1;
-	return 0;
+    int &n = N;
+    int l = 0, r = 1, h = V[0], last_h = -1;
+    while (r <= n) {
+        if (r == n || V[r] > h) { // non posso prolungare l'intervallo da flippare
+            if (V[r - 1] < last_h) // il minimo di questo intervallo è minore del massimo dell'intervallo prima
+                return false;
+            L.emplace_back(r - l);
+            last_h = V[l];
+            if (r < n) h = V[r];
+            l = r;
+        } else {
+            h = V[r];
+        }
+        r++;
+    }
+    return true;
 }
